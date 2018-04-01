@@ -9,7 +9,7 @@
   },
   "author": "Yvonne Ng <ngyv.codes@gmail.com> (github.com/ngyv)",
   "engines": {
-    "node": ">=4"
+    "node": ">=6"
   },
   "scripts": {
     "test": "ava"
