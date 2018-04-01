@@ -1,0 +1,31 @@
+{
+  "name": "@ngyv/prop-utils",
+  "version": "0.1.0",
+  "description": "Utility functions for properties management",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngyv/prop-utils.git"
+  },
+  "author": "Yvonne Ng <ngyv.codes@gmail.com> (github.com/ngyv)",
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "test": "ava"
+  },
+  "files": [
+    "index.js"
+  ],
+  "plugins": ["plugins/markdown"],
+  "keywords": [],
+  "dependencies": {},
+  "devDependencies": {
+    "ava": "^0.20.0"
+  },
+  "bugs": {
+    "url": "https://github.com/ngyv/prop-utils/issues"
+  },
+  "homepage": "https://github.com/ngyv/prop-utils#readme",
+  "main": "index.js"
+}
