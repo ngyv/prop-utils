@@ -6,14 +6,14 @@
 ## Install
 
 ```
-$ npm install prop-utils --save
+$ npm i @ngyv/prop-utils --save
 ```
 
 
 ## Usage
 
 ```js
-import { types, identify, compareType, isEqual } from 'prop-utils'
+import { types, identify, compareType, isEqual } from '@ngyv/prop-utils'
 const propertyA = {
   name: 'Siti Nurhaliza',
   age: undefined,
