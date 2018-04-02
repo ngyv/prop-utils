@@ -67,8 +67,12 @@ const compareValue = function(propertyA, propertyB, opts = {}) {
     return compareObjectWithKeys(propertyA, propertyB)
   }
   else if (typeA === types.class) {
-    if (propertyA.constructor.name !== propertyB.constructor.name) { return false; }
-    return opts.classComparator ? opts.classComparator(propertyA, propertyB) : compareObjectWithKeys(propertyA, propertyB)
+    if (opts.classComparator) {
+      opts.classComparator(propertyA, propertyB);
+    } else if (propertyA.constructor.name !== propertyB.constructor.name) {
+      return false;
+    }
+    return compareObjectWithKeys(propertyA, propertyB)
   }
   return typeA === typeB;
 };

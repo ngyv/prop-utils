@@ -121,6 +121,26 @@ test('Compares values happy path', t => {
 	});
 });
 
+test('Compares class values correctly', t => {
+	const { compareValue, types } = utils;
+	class Banana {
+		shout() {
+			return 'HELLO!';
+		}
+	}
+	class B1 extends Banana {}
+	class B2 extends Banana {}
+	const b1 = new B1();
+	const b2 = new B2();
+	t.is(compareValue(b1, b2), false, 'Different classes when no classComparator provided');
+	const options = {
+		classComparator: function(b1, b2) {
+			return b1.shout() === b2.shout();
+		}
+	};
+	t.is(compareValue(b1, b2, options), true, 'Same custom class when classComparator provided');
+})
+
 test('Equates null and empty string properties', t => {
 	const { isEqual } = utils;
 	t.is(isEqual(null, ''), true);

@@ -34,6 +34,25 @@ getTypeName(identify(propertyA.name));
 compareType(propertyA, propertyB);
 //=> true
 
+const similar = { nil: [types.undefined, types.null] };
+compareType(undefined, null, similar);
+//=> true
+
+class Banana {
+  shout() {
+    return 'HELLO!';
+  }
+}
+class B1 extends Banana {}
+class B2 extends Banana {}
+const b1 = new B1();
+const b2 = new B2();
+compareValue(b1, b2);
+//=> false
+
+compareValue(b1, b2, { classComparator: (b1, b2) => return b1.shout() === b2.shout() });
+//=> true
+
 isEqual(propertyA, propertyB);
 //=> false
 ```
