@@ -13,6 +13,10 @@ const types = Object.freeze({
   'class': 10,
 });
 
+const getTypeName = function(type) {
+  return Object.keys(types)[type - 1];
+};
+
 const identify = function(property) {
   if (typeof property === 'object') { // null, array, object
     if (property === null) {
@@ -114,6 +118,7 @@ const isEqual = function(propertyA, propertyB) {
 
 module.exports = {
   types,
+  getTypeName,
   identify,
   compareObjectWithKeys,
   compareValue,

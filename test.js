@@ -11,6 +11,11 @@ test('Property types is immutable', t => {
 	t.is(error.message, 'Cannot assign to read only property \'null\' of object \'#<Object>\'');
 });
 
+test('Gets correct type name', t => {
+	const { getTypeName, types } = utils;
+	t.is(getTypeName(types.string), 'string');
+});
+
 test('Identifies properties accurately', t => {
 	const { identify, types } = utils;
 	class Custom {}
