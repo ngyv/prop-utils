@@ -1,6 +1,6 @@
 {
   "name": "@ngyv/prop-utils",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Utility functions for properties management",
   "license": "MIT",
   "repository": {
