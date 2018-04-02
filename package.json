@@ -1,6 +1,6 @@
 {
   "name": "@ngyv/prop-utils",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Utility functions for properties management",
   "license": "MIT",
   "repository": {
@@ -17,7 +17,9 @@
   "files": [
     "index.js"
   ],
-  "plugins": ["plugins/markdown"],
+  "plugins": [
+    "plugins/markdown"
+  ],
   "keywords": [],
   "dependencies": {},
   "devDependencies": {
