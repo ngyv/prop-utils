@@ -11,6 +11,7 @@ const types = Object.freeze({
   'date': 8,
   'object': 9,
   'class': 10,
+  'function': 11,
 });
 
 const getTypeName = function(type) {
@@ -54,7 +55,7 @@ const compareValue = function(propertyA, propertyB, opts = {}) {
   const typeB = identify(propertyB);
 
   // Simple value comparison
-  if (typeA === types.string || typeA === types.number || typeA === types.boolean) {
+  if (typeA === types.string || typeA === types.number || typeA === types.boolean || typeA === types.function) {
     return propertyA === propertyB;
   }
   else if (typeA === types.array) {
