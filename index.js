@@ -37,6 +37,36 @@ const identify = function(property) {
   }
 };
 
+/* * * * * * *
+ *   Helpers
+ * * * * * * */
+function _compareTypes(typeA, typeB, sameTypes = {}, propertyA, propertyB) {
+  if (typeA === typeB) {
+    if (typeA === types.class && propertyA && propertyB) {
+      return propertyA.constructor.name === propertyB.constructor.name;
+    }
+    return true;
+  }
+
+  if (Object.keys(sameTypes).length === 0) {
+    return false;
+  }
+  let typeKeyA;
+  let typeKeyB;
+  const foundMatch = Object.keys(sameTypes).some((key) => {
+    const similar = sameTypes[key];
+    if (similar.indexOf(typeA) > -1) {
+      typeKeyA = key;
+    }
+    if (similar.indexOf(typeB) > -1) {
+      typeKeyB = key;
+    }
+    return typeKeyA && typeKeyB;
+  });
+  return foundMatch && typeKeyA === typeKeyB;
+}
+
+
 const compareObjectWithKeys = function(propertyA, propertyB, relevantKeys = []) {
   const keysA = Object.keys(propertyA);
   const keysB = Object.keys(propertyB);
@@ -81,29 +111,7 @@ const compareValue = function(propertyA, propertyB, opts = {}) {
 const compareType = function(propertyA, propertyB, sameTypes = {}) {
   const typeA = identify(propertyA);
   const typeB = identify(propertyB);
-  if (typeA === typeB) {
-    if (typeA === types.class) {
-      return propertyA.constructor.name === propertyB.constructor.name;
-    }
-    return true;
-  }
-
-  if (Object.keys(sameTypes).length === 0) {
-    return false;
-  }
-  let typeKeyA;
-  let typeKeyB;
-  Object.keys(sameTypes).some((key) => {
-    const similar = sameTypes[key];
-    if (!typeKeyA && similar.indexOf(typeKeyA) > -1) {
-      typeKeyA = key;
-    }
-    if (!typeKeyB && similar.indexOf(typeKeyB) > -1) {
-      typeKeyB = key;
-    }
-    return typeKeyA && typeKeyB;
-  });
-  return typeKeyA === typeKeyB;
+  return _compareTypes(typeA, typeB, sameTypes, propertyA, propertyB);
 };
 
 const isEqual = function(propertyA, propertyB) {
