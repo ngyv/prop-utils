@@ -11,9 +11,14 @@ test('Property types is immutable', t => {
   t.is(error.message, 'Cannot assign to read only property \'null\' of object \'#<Object>\'');
 });
 
-test('Gets correct type name', t => {
+test('Gets correct name from identified type', t => {
   const { getTypeName, types } = utils;
   t.is(getTypeName(types.string), 'string');
+});
+
+test('Gets correct type name from property', t => {
+  const { getPropertyTypeName } = utils;
+  t.is(getPropertyTypeName(1), 'number');
 });
 
 test('Identifies properties accurately', t => {
@@ -144,7 +149,14 @@ test('Compares class values correctly', t => {
     }
   };
   t.is(compareValue(b1, b2, options), true, 'Same custom class when classComparator provided');
-})
+});
+
+test('Compares property to type provided correctly', t => {
+  const { comparePropertyToType, types } = utils;
+  const similar = { nil: [types.undefined, types.null, types.string] };
+  t.is(comparePropertyToType('str', types.undefined), false, 'Comparing `str` to `type.undefined` returns false without sameTypes');
+  t.is(comparePropertyToType('str', types.undefined, similar), true, 'Comparing `str` to `type.undefined` returns true with sameTypes');
+});
 
 test('Equates null and empty string properties', t => {
   const { isEqual } = utils;

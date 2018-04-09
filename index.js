@@ -18,6 +18,11 @@ const getTypeName = function(type) {
   return Object.keys(types)[type - 1];
 };
 
+const getPropertyTypeName = function(property) {
+  const type = identify(property);
+  return getTypeName(type);
+}
+
 const identify = function(property) {
   if (typeof property === 'object') { // null, array, object
     if (property === null) {
@@ -129,12 +134,19 @@ const isEqual = function(propertyA, propertyB) {
   return false;
 };
 
+const comparePropertyToType = function(property, type, sameTypes = {}) {
+  const propertyType = identify(property);
+  return _compareTypes(propertyType, type, sameTypes);
+};
+
 module.exports = {
   types,
   getTypeName,
+  getPropertyTypeName,
   identify,
   compareObjectWithKeys,
   compareValue,
   compareType,
   isEqual,
+  comparePropertyToType,
 }

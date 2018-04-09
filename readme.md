@@ -13,7 +13,7 @@ $ npm i @ngyv/prop-utils --save
 ## Usage
 
 ```js
-import { types, getTypeName, identify, compareType, isEqual } from '@ngyv/prop-utils'
+import { types, getPropertyTypeName, identify, compareType, isEqual } from '@ngyv/prop-utils'
 
 const propertyA = {
   name: 'Siti Nurhaliza',
@@ -28,7 +28,7 @@ const propertyB = {
 identify(propertyA.age) === types.undefined;
 //=> true
 
-getTypeName(identify(propertyA.name));
+getPropertyTypeName(propertyA.name);
 //=> 'string'
 
 compareType(propertyA, propertyB);
@@ -51,6 +51,13 @@ compareValue(b1, b2);
 //=> false
 
 compareValue(b1, b2, { classComparator: (b1, b2) => return b1.shout() === b2.shout() });
+//=> true
+
+comparePropertyToType('str', types.null);
+//=> false
+
+const acceptedTypes = { strings: [types.string, types.null, types.emptyString] };
+comparePropertyToType('str', types.null, acceptedTypes);
 //=> true
 
 isEqual(propertyA, propertyB);
