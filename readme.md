@@ -1,4 +1,5 @@
-# prop-utils [![Build Status](https://travis-ci.org/ngyv/prop-utils.svg?branch=master)](https://travis-ci.org/ngyv/prop-utils)
+# prop-utils [![Build Status](https://travis-ci.org/ngyv/prop-utils.svg?branch=master)](https://travis-ci.org/ngyv/prop-utils)[![npm download](https://img.shields.io/npm/dt/@ngyv/prop-utils.svg)](https://www.npmjs.com/package/@ngyv/prop-utils)  
+
 
 > Utility functions for properties management
 
