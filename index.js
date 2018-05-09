@@ -151,7 +151,8 @@ const parseValueToType = function(value, type) {
     const strValue = value.toString();
     switch(type) {
       case types.number:
-        return new Number(strValue).valueOf();
+        let tryNumber = new Number(strValue).valueOf();
+        return isNaN(tryNumber) ? value : tryNumber;
       case types.object:
       case types.array:
       case types.boolean:

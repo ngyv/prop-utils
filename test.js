@@ -189,6 +189,11 @@ test('Equates object properties', t => {
   t.is(isEqual(propertyA, propertyB), false);
 });
 
+test('Parses value to expected type', t => {
+  const { types, parseValueToType } = utils;
+  t.is(parseValueToType('random', types.number), 'random', 'Returns original value if NaN for expected type number');
+});
+
 test('Parses values to json type', t => {
   const { types, parseJson } = utils;
   const json = {
