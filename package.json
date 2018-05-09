@@ -12,7 +12,7 @@
     "node": ">=6"
   },
   "scripts": {
-    "test": "ava"
+    "test": "nyc ava"
   },
   "files": [
     "index.js"
@@ -23,7 +23,9 @@
   "keywords": [],
   "dependencies": {},
   "devDependencies": {
-    "ava": "^0.20.0"
+    "ava": "^0.20.0",
+    "codecov": "^3.0.2",
+    "nyc": "^11.7.2"
   },
   "bugs": {
     "url": "https://github.com/ngyv/prop-utils/issues"
