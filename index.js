@@ -158,7 +158,8 @@ const parseValueToType = function(value, type) {
       case types.boolean:
         return JSON.parse(strValue);
       case types.date:
-        return new Date(strValue);
+      let tryDate = new Date(strValue);
+        return isNaN(tryDate.getTime()) ? value : tryDate;
     }
   }
   return value;

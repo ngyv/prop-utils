@@ -190,8 +190,12 @@ test('Equates object properties', t => {
 });
 
 test('Parses value to expected type', t => {
+  t.plan(2);
+
   const { types, parseValueToType } = utils;
+
   t.is(parseValueToType('random', types.number), 'random', 'Returns original value if NaN for expected type number');
+  t.is(parseValueToType('also random', types.date), 'also random', 'Returns original value if Invalid Date for expected type date');
 });
 
 test('Parses values to json type', t => {
