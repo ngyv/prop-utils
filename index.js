@@ -58,7 +58,9 @@ function _compareTypes(typeA, typeB, sameTypes = {}, propertyA, propertyB) {
   }
   let typeKeyA;
   let typeKeyB;
-  const foundMatch = Object.keys(sameTypes).some((key) => {
+  let foundMatch = false
+  Object.keys(sameTypes).forEach((key) => {
+    if (foundMatch) { return }
     const similar = sameTypes[key];
     if (similar.indexOf(typeA) > -1) {
       typeKeyA = key;
@@ -66,7 +68,7 @@ function _compareTypes(typeA, typeB, sameTypes = {}, propertyA, propertyB) {
     if (similar.indexOf(typeB) > -1) {
       typeKeyB = key;
     }
-    return typeKeyA && typeKeyB;
+    if (typeKeyA && typeKeyB) { foundMatch = true }
   });
   return foundMatch && typeKeyA === typeKeyB;
 }
@@ -77,9 +79,12 @@ const compareObjectWithKeys = function(propertyA, propertyB, relevantKeys = []) 
   const keysB = Object.keys(propertyB);
   const moreKeys = keysA.length > keysB.length ? keysA : keysB;
   const iteratorKeys = relevantKeys.length ? relevantKeys : moreKeys
-  return !iteratorKeys.some((key) => {
-    return !isEqual(propertyA[key], propertyB[key])
+  let allSame = true
+  iteratorKeys.forEach((key) => {
+    if (!allSame) { return }
+    allSame = isEqual(propertyA[key], propertyB[key])
   });
+  return allSame
 }
 
 // Assumes the type is same / similar

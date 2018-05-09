@@ -151,6 +151,20 @@ test('Compares class values correctly', t => {
   t.is(compareValue(b1, b2, options), true, 'Same custom class when classComparator provided');
 });
 
+test('Compares object keys correctly', t => {
+  t.plan(4);
+
+  const { compareObjectWithKeys } = utils;
+  const x = { name: 'Najib', occupation: 'robber', 'negara': 'Malaysia' }
+  const y = { name: 'Mahathir', occupation: 'thief', 'negara': 'Malaysia' }
+  const z = { name: 'Najib', occupation: 'thief', 'negara': 'Malaysia' }
+
+  t.is(compareObjectWithKeys(x, x), true)
+  t.is(compareObjectWithKeys(x, y), false)
+  t.is(compareObjectWithKeys(x, y, ['negara']), true)
+  t.is(compareObjectWithKeys(x, z), false)
+});
+
 test('Compares property to type provided correctly', t => {
   const { comparePropertyToType, types } = utils;
   const similar = { nil: [types.undefined, types.null, types.string] };
