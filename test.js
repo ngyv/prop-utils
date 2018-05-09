@@ -174,3 +174,32 @@ test('Equates object properties', t => {
   };
   t.is(isEqual(propertyA, propertyB), false);
 });
+
+test('Parses values to json type', t => {
+  const { types, parseJson } = utils;
+  const json = {
+    'account_id': '1.1',
+    'likes': '["to","be","tested"]',
+    'is_happy': 'false',
+    'updated_at': '2018-04-02T09:12:20.221Z',
+    'name': 'Nina Nesbitt',
+    'gender': undefined,
+  }
+  const expectedTypes = {
+    account_id: types.number,
+    likes: types.array,
+    is_happy: types.boolean,
+    updated_at: types.date,
+    name: types.string,
+    gender: types.string,
+  }
+
+  t.deepEqual(parseJson(json, expectedTypes), {
+    account_id: 1.1,
+    likes: ["to","be","tested"],
+    is_happy: false,
+    updated_at: new Date(json.updated_at),
+    name: json.name,
+    gender: undefined
+  }, 'Parses json attributes based on described types');
+});

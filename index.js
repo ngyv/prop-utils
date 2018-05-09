@@ -139,6 +139,33 @@ const comparePropertyToType = function(property, type, sameTypes = {}) {
   return _compareTypes(propertyType, type, sameTypes);
 };
 
+const parseValueToType = function(value, type) {
+  const valueType = identify(value);
+  const isUnparsable = !comparePropertyToType(type, types.number);
+  if (!isUnparsable && valueType !== type && valueType !== types.undefined && valueType !== types.null) {
+    const strValue = value.toString();
+    switch(type) {
+      case types.number:
+        return new Number(strValue).valueOf();
+      case types.object:
+      case types.array:
+      case types.boolean:
+        return JSON.parse(strValue);
+      case types.date:
+        return new Date(strValue);
+    }
+  }
+  return value;
+};
+
+const parseJson = function(modelJson, attributeTypes) {
+  Object.keys(modelJson).forEach((key) => {
+    let value = modelJson[key];
+    modelJson[key] = parseValueToType(value, attributeTypes[key]);
+  });
+  return modelJson;
+};
+
 module.exports = {
   types,
   getTypeName,
@@ -149,4 +176,6 @@ module.exports = {
   compareType,
   isEqual,
   comparePropertyToType,
+  parseValueToType,
+  parseJson,
 }

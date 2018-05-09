@@ -1,4 +1,4 @@
-# prop-utils [![Build Status](https://travis-ci.org/ngyv/prop-utils.svg?branch=master)](https://travis-ci.org/ngyv/prop-utils)[![npm download](https://img.shields.io/npm/dt/@ngyv/prop-utils.svg)](https://www.npmjs.com/package/@ngyv/prop-utils)  
+# prop-utils [![Build Status](https://travis-ci.org/ngyv/prop-utils.svg?branch=master)](https://travis-ci.org/ngyv/prop-utils) [![codecov](https://codecov.io/gh/ngyv/prop-utils/branch/master/graph/badge.svg)](https://codecov.io/gh/ngyv/prop-utils) [![npm download](https://img.shields.io/npm/dt/@ngyv/prop-utils.svg)](https://www.npmjs.com/package/@ngyv/prop-utils)  
 
 
 > Utility functions for properties management
@@ -14,7 +14,15 @@ $ npm i @ngyv/prop-utils --save
 ## Usage
 
 ```js
-import { types, getPropertyTypeName, identify, compareType, isEqual } from '@ngyv/prop-utils'
+import {
+  types,
+  getPropertyTypeName,
+  identify,
+  compareType,
+  isEqual,
+  parseValueToType,
+  parseJson,
+} from '@ngyv/prop-utils'
 
 const propertyA = {
   name: 'Siti Nurhaliza',
@@ -63,6 +71,24 @@ comparePropertyToType('str', types.null, acceptedTypes);
 
 isEqual(propertyA, propertyB);
 //=> false
+
+parseValueToType('12.1', types.number);
+//=> 12.1
+
+parseValueToType(null, types.number);
+//=> null
+
+const json = {
+  accountId: 1,
+  createdAt: '2018-04-02T09:12:20.221Z',
+}
+const expectedTypes = {
+  accountId: types.number,
+  createdAt: types.date,
+}
+
+parseJson(json, expectedTypes);
+//=> { accountId: 1, createdAt: Date 2018-04-02 09:12:20 221ms Z }
 ```
 
 
