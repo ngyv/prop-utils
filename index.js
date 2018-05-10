@@ -45,7 +45,8 @@ const identify = function(property) {
 /* * * * * * *
  *   Helpers
  * * * * * * */
-function _compareTypes(typeA, typeB, sameTypes = {}, propertyA, propertyB) {
+function _compareTypes(typeA, typeB, sameTypes, propertyA, propertyB) {
+  sameTypes = sameTypes || {}
   if (typeA === typeB) {
     if (typeA === types.class && propertyA && propertyB) {
       return propertyA.constructor.name === propertyB.constructor.name;
@@ -74,7 +75,8 @@ function _compareTypes(typeA, typeB, sameTypes = {}, propertyA, propertyB) {
 }
 
 
-const compareObjectWithKeys = function(propertyA, propertyB, relevantKeys = []) {
+const compareObjectWithKeys = function(propertyA, propertyB, relevantKeys) {
+  relevantKeys = relevantKeys || []
   const keysA = Object.keys(propertyA);
   const keysB = Object.keys(propertyB);
   const moreKeys = keysA.length > keysB.length ? keysA : keysB;
@@ -90,7 +92,8 @@ const compareObjectWithKeys = function(propertyA, propertyB, relevantKeys = []) 
 // Assumes the type is same / similar
 // opts = { classComparator: function(propertyA, propertyB) {}}
 // opts = { sameTypes: {} }
-const compareValue = function(propertyA, propertyB, opts = {}) {
+const compareValue = function(propertyA, propertyB, opts) {
+  opts = opts || {}
   const typeA = identify(propertyA);
   const typeB = identify(propertyB);
 
@@ -118,7 +121,8 @@ const compareValue = function(propertyA, propertyB, opts = {}) {
   return typeA === typeB;
 };
 
-const compareType = function(propertyA, propertyB, sameTypes = {}) {
+const compareType = function(propertyA, propertyB, sameTypes) {
+  sameTypes = sameTypes || {}
   const typeA = identify(propertyA);
   const typeB = identify(propertyB);
   return _compareTypes(typeA, typeB, sameTypes, propertyA, propertyB);
@@ -139,7 +143,8 @@ const isEqual = function(propertyA, propertyB) {
   return false;
 };
 
-const comparePropertyToType = function(property, type, sameTypes = {}) {
+const comparePropertyToType = function(property, type, sameTypes) {
+  sameTypes = sameTypes || {}
   const propertyType = identify(property);
   return _compareTypes(propertyType, type, sameTypes);
 };
